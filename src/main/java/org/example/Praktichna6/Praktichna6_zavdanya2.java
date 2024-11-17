@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Praktichna6;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -43,10 +43,6 @@ public class Praktichna6_zavdanya2 {
         }
         else {
             System.out.println("Многокутник не може існувати.");
-        }
-
-        if (X[corner_count - 1] <= 0 || X[corner_count - 1] >= 180) {
-            System.out.println("Неможливо згенерувати багатокутник з такими кутами.");
         }
 
     }
