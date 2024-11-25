@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class zavdanya1 {
     public static void main(String[] args) {
 
+        System.out.println("Завдання 1 практична 7");
         Scanner s = new Scanner(System.in);
         Random r = new Random();
 

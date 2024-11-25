@@ -8,6 +8,7 @@ public class zavdanya2 {
         Scanner s = new Scanner(System.in);
         Random r = new Random();
 
+        System.out.println("Завдання 2 практична 7");
         System.out.println("Введіть розмір двовимірного масиву: ");
         int row_size = s.nextInt();
         int column_size = s.nextInt();
