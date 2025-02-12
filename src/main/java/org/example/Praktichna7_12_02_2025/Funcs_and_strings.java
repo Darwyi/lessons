@@ -4,16 +4,32 @@ import java.util.Scanner;
 
 public class Funcs_and_strings {
 
-    public static boolean contains_3_letters(String text) {
-        boolean has_3_letters;
+    public static String right_text() {
+        Scanner scanner = new Scanner(System.in);
 
-        if (text.length() >= 3) {
-            has_3_letters = true;
-        } else {
-            has_3_letters = false;
+        while (true) {
+            System.out.print("Enter your special text: ");
+            String input = scanner.nextLine().trim();
+            scanner.nextLine();
+            String[] words = input.split("\\s+");
+
+            int validWordsCount = 0;
+            for (String word : words) {
+                if (word.length() >= 3) {
+                    validWordsCount++;
+                }
+            }
+
+            if (validWordsCount >= 2) {
+                return input;
+            } else {
+                System.out.println("Wrong! enter a text, wich have at least 2 words of 3 letters.");
+            }
         }
+    }
 
-        return has_3_letters;
+    public static boolean is_valid_text() {
+        return !right_text().isEmpty();
     }
 
     public static String reverse_user_text(String specialText) {
@@ -52,25 +68,13 @@ public class Funcs_and_strings {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        boolean enter_right_text = true;
-        boolean program_running = false;
-        String special_text = "";
+        boolean program_running = true;
 
-        System.out.println("Enter your special text: ");
+        String special_text = right_text();
 
-        while (enter_right_text) {
-            special_text = s.nextLine();
-            if (contains_3_letters(special_text)) {
-                program_running = true;
-                break;
-            } else {
-                enter_right_text = true;
-                System.out.println("Enter text, wich contains at least 3 letters!");
-            }
-        }
-
-        while (program_running) {
-            System.out.println("""
+        if (is_valid_text()) {
+            while (program_running) {
+                System.out.println("""
                          Choose what you want to do with your text
                        \s
                          reverse(1)                 reverse every word(2)
@@ -78,55 +82,54 @@ public class Funcs_and_strings {
                                          exit program(3)
                    \s""");
 
-            String choose = s.nextLine();
+                String choose = s.nextLine();
 
-            switch (choose) {
-                case "1":
-                    System.out.println(reverse_user_text(special_text));
-                    System.out.println("""
+                switch (choose) {
+                    case "1":
+                        System.out.println(reverse_user_text(special_text));
+                        System.out.println("""
                             Want to do another text operations?
                             
                             yes(1)          exit the program(2)
                             """);
 
-                    String another_operation = s.nextLine();
+                        String another_operation = s.nextLine();
 
-                    if (another_operation == "1") {
+                        if (another_operation == "1") {
+                            break;
+                        }
+
+                        if (another_operation == "2") {
+                            program_running = false;
+                        }
                         break;
-                    }
 
-                    if (another_operation == "2") {
-                        program_running = false;
-                        break;
-                    }
-                break;
-
-                case "2" :
-                    System.out.println(reverse_user_text_by_words(special_text));
-                    System.out.println("""
+                    case "2" :
+                        System.out.println(reverse_user_text_by_words(special_text));
+                        System.out.println("""
                             Want to do another text operations?
                             
                             yes(1)          exit the program(2)
                             """);
 
-                    String another_operation_1 = s.nextLine();
+                        String another_operation_1 = s.nextLine();
 
-                    if (another_operation_1 == "1") {
+                        if (another_operation_1 == "1") {
+                            break;
+                        }
+
+                        if (another_operation_1 == "2") {
+                            program_running = false;
+                        }
                         break;
-                    }
 
-                    if (another_operation_1 == "2") {
+                    case "3":
                         program_running = false;
                         break;
-                    }
-                    break;
 
-                case "3":
-                    program_running = false;
-                    break;
-
-                default:
-                    System.out.println("Enter a right choose!");
+                    default:
+                        System.out.println("Enter a right choose!");
+                }
             }
         }
     }
