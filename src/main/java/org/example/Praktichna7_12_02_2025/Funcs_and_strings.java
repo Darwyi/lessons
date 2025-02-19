@@ -10,7 +10,6 @@ public class Funcs_and_strings {
         while (true) {
             System.out.print("Enter your special text: ");
             String input = scanner.nextLine().trim();
-            scanner.nextLine();
             String[] words = input.split("\\s+");
 
             int validWordsCount = 0;
