@@ -19,6 +19,7 @@ public class FullGameRework {
         return input;
     }
 
+
     public static void main_menu() {
         System.out.println("\t\tMain Menu\n\tPlay(1)\t\tSettings(2)\n\t\t\t\tExit(3)");
         int choice = input();
