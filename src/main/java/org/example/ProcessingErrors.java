@@ -9,18 +9,6 @@ public class ProcessingErrors {
     public static int Users = 0;
     public static  String CurrentMenu = "Main";
 
-    public static String UserInput() {
-        String userInput = null;
-
-        try {
-            userInput = s.nextLine();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            return userInput;
-        }
-    }
-
     public static void main(String[] args) {
 
         System.out.println("""
@@ -31,7 +19,7 @@ public class ProcessingErrors {
                 """);
         while (CurrentMenu.equals("Main")) {
 
-            String MainMenuChoice = UserInput();
+            String MainMenuChoice = s.nextLine();
 
             switch (MainMenuChoice) {
                 case "1":
@@ -51,21 +39,30 @@ public class ProcessingErrors {
     }
 
     public static boolean LoginCheck(String login) {
-        if (login.length() >= 5) {
-            for (int i = 0; i < login.length(); i++) {
-                if (login.charAt(i) == ' ') {
-                    System.out.println("Логін не має містити пробілів!");
-                }
+        int spaces = 0;
+        for (int i = 0; i < login.length(); i++) {
+            if (login.charAt(i) == ' ') {
+                spaces++;
             }
+        }
+        if (login.length() >= 5) {
+            System.out.println("Login is must have at least 5 symbols");
         } else {
             return false;
         }
+        if (spaces != 0) {
+            System.out.println("Login can't have spaces!");
+        } else {
+            return false;
+        }
+
+
 
         return true;
     }
 
     public static boolean PasswordCheck(String password) {
-
+        String AllowedSymbols;
 
         return true;
     }
@@ -79,17 +76,21 @@ public class ProcessingErrors {
                 break;
             }
 
-            String UserLogin = UserInput();
+            String UserLogin = s.nextLine();
             boolean RightLogin = LoginCheck(UserLogin);
 
             while (!RightLogin) {
                 System.out.print("Authorize user \n\nLogin: ");
-                UserLogin = UserInput();
+                UserLogin = s.nextLine();
                 RightLogin = LoginCheck(UserLogin);
             }
 
                 System.out.print("\nPassword: ");
-                String UserPassword = UserInput();
+                String UserPassword = s.nextLine();
+
+                Users++;
+                CurrentMenu = "Main";
+                break;
         }
     }
 }
