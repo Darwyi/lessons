@@ -29,6 +29,7 @@ public class WorkWithFiles_Rework {
 
                 case "3":
                     PrintFromNumToNum();
+                    break;
 
                 case "4":
                     running = false;
