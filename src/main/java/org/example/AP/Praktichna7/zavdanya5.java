@@ -1,4 +1,4 @@
-package org.example.Praktichna7;
+package org.example.AP.Praktichna7;
 
 import java.util.Random;
 import java.util.Scanner;

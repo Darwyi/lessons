@@ -1,4 +1,4 @@
-package org.example.Praktichna7_12_02_2025;
+package org.example.AP.Praktichna7_12_02_2025;
 
 import java.util.Scanner;
 

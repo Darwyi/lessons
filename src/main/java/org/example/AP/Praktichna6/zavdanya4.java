@@ -1,7 +1,4 @@
-package org.example.Praktichna6;
-
-import java.util.Random;
-import java.util.Scanner;
+package org.example.AP.Praktichna6;
 
 public class zavdanya4 {
     public static void main(String[] args) {

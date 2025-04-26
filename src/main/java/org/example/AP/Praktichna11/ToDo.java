@@ -1,4 +1,4 @@
-package org.example.Praktichna11;
+package org.example.AP.Praktichna11;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +12,9 @@ public class ToDo {
     private static int AddToDoCount = 0;
 
     public static void main(String[] args) {
-        while (true) {
+        boolean Running = true;
+
+        while (Running) {
             System.out.println("""
                                     ToDos
                     AddNew Todo(1)          DeleteToDo(2)
@@ -32,6 +34,7 @@ public class ToDo {
                     break;
                 case "4":
                     s.close();
+                    Running = false;
                     break;
                 default:
                     System.out.println("Enter valid choose!");

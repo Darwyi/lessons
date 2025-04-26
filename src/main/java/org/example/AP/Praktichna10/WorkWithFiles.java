@@ -1,4 +1,4 @@
-package org.example.Praktichna10;
+package org.example.AP.Praktichna10;
 
 import java.io.*;
 import java.util.Scanner;

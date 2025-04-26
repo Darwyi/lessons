@@ -1,4 +1,4 @@
-package org.example.Praktichna6;
+package org.example.AP.Praktichna6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
