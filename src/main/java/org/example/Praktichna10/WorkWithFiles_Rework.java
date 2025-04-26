@@ -1,6 +1,5 @@
 package org.example.Praktichna10;
 
-import javax.sound.sampled.Line;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -74,8 +73,6 @@ public class WorkWithFiles_Rework {
             System.out.println("Input a number!");
         }
 
-        s.close();
-
         for (int i = Start - 1; i < End && i < FileContent.size(); i++) {
             System.out.println((i + 1) + ": " + FileContent.get(i));
         }
@@ -103,8 +100,6 @@ public class WorkWithFiles_Rework {
         // він мені знадобився тому-що я не зрозумів як зробити самозмінуванний массив, тобто щоб він не потребував ініціалізації (введення обмежень)
         ArrayList<String> PoperedniLines = new ArrayList<>();
         String line;
-        int LineNum = 1;
-
 
         try (BufferedReader reader = new BufferedReader(new FileReader("File.txt"))) {
             while ((line = reader.readLine()) != null) {
