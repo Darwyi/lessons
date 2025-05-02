@@ -1,12 +1,10 @@
 package org.example.AP.Praktichna11;
 
 import java.io.*;
-import java.net.URI;
 import java.nio.file.*;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ToDoUpgrade {
@@ -33,7 +31,6 @@ public class ToDoUpgrade {
                 System.out.println("Wrong input!");
             }
         }
-
     }
 
     private static void Programm() {
@@ -42,8 +39,7 @@ public class ToDoUpgrade {
             System.out.println("""
                                     ToDos
                     AddNew Todo(1)          DeleteToDo(2)
-                    ViewAllTodos(3)         Change dateformat(4)
-                    Exit(5)
+                    ViewAllTodos(3)         Exit(4)
                     """);
             String choose = s.nextLine();
 
@@ -57,10 +53,10 @@ public class ToDoUpgrade {
                 case "3":
                     ViewAllToDos();
                     break;
+//                case "4":
+//                    ChangeDateFormat();
+//                    break;
                 case "4":
-                    ChangeDateFormat();
-                    break;
-                case "5":
                     Exit();
                     break;
                 default:
@@ -70,23 +66,23 @@ public class ToDoUpgrade {
         }
     }
 
-    private static void ChangeDateFormat() {
-        try {
-            System.out.print("""
-                    Enter your date format or choose standart (example, yyyy-MM-dd HH:mm)
-                    (or you can use standart format ISO_LOCAL_DATE_TIME) [y/n]:\s""");
-            String formatInput = s.nextLine();
-            if (formatInput.equalsIgnoreCase("y")) {
-                formatInput = s.nextLine();
-                datetime_format = DateTimeFormatter.ofPattern(formatInput);
-                Programm();
-            } else if (formatInput.equalsIgnoreCase("n")) {
-                Programm();
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    private static void ChangeDateFormat() {
+//        try {
+//            System.out.print("""
+//                    Enter your date format or choose standart (example, yyyy-MM-dd HH:mm)
+//                    (or you can use standart format ISO_LOCAL_DATE_TIME) [y/n]:\s""");
+//            String formatInput = s.nextLine();
+//            if (formatInput.equalsIgnoreCase("y")) {
+//                formatInput = s.nextLine();
+//                datetime_format = DateTimeFormatter.ofPattern(formatInput);
+//                Programm();
+//            } else if (formatInput.equalsIgnoreCase("n")) {
+//                Programm();
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     private static void Exit() {
         System.out.print("Would you like to save your file? [y/n]: ");
