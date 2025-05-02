@@ -1,9 +1,8 @@
 package org.example.AP.Praktichna11;
 
 import java.io.*;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URI;
+import java.nio.file.*;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +12,9 @@ import java.util.Scanner;
 public class ToDoUpgrade {
     private static final int MAX_ENTRIES = 50;
     private static final Scanner s = new Scanner(System.in);
-    private static final DateTimeFormatter datetime_format = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static DateTimeFormatter datetime_format = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     private static Path filePath = Paths.get("src//main//resources//File.txt");
+    private static boolean Running = true;
 
     public static void main(String[] args) {
 
@@ -23,16 +23,54 @@ public class ToDoUpgrade {
             String extdf = s.nextLine();
             if (extdf.equalsIgnoreCase("new")) {
                 CreateToDosFile();
+                Programm();
                 break;
             } else if (extdf.equalsIgnoreCase("load")) {
                 LoadToDosFile();
+                Programm();
                 break;
             } else {
                 System.out.println("Wrong input!");
             }
         }
 
+    }
 
+    private static void Programm() {
+
+        while (Running) {
+            System.out.println("""
+                                    ToDos
+                    AddNew Todo(1)          DeleteToDo(2)
+                    ViewAllTodos(3)         Change dateformat(4)
+                    Exit(5)
+                    """);
+            String choose = s.nextLine();
+
+            switch (choose) {
+                case "1":
+                    AddNewTodo();
+                    break;
+                case "2":
+                    DeleteTodo();
+                    break;
+                case "3":
+                    ViewAllToDos();
+                    break;
+                case "4":
+                    ChangeDateFormat();
+                    break;
+                case "5":
+                    Exit();
+                    break;
+                default:
+                    System.out.println("Enter valid choose!");
+                    break;
+            }
+        }
+    }
+
+    private static void ChangeDateFormat() {
         try {
             System.out.print("""
                     Enter your date format or choose standart (example, yyyy-MM-dd HH:mm)
@@ -40,39 +78,14 @@ public class ToDoUpgrade {
             String formatInput = s.nextLine();
             if (formatInput.equalsIgnoreCase("y")) {
                 formatInput = s.nextLine();
-                DateTimeFormatter.ofPattern(formatInput);
+                datetime_format = DateTimeFormatter.ofPattern(formatInput);
+                Programm();
             } else if (formatInput.equalsIgnoreCase("n")) {
-                while (true) {
-                    System.out.println("""
-                                    ToDos
-                    AddNew Todo(1)          DeleteToDo(2)
-                    ViewAllTodos(3)         Exit(4)
-                    """);
-                    String choose = s.nextLine();
-
-                    switch (choose) {
-                        case "1":
-                            AddNewTodo();
-                            break;
-                        case "2":
-                            DeleteTodo();
-                            break;
-                        case "3":
-                            ViewAllToDos();
-                            break;
-                        case "4":
-                            Exit();
-                            break;
-                        default:
-                            System.out.println("Enter valid choose!");
-                            break;
-                    }
-                }
+                Programm();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     private static void Exit() {
@@ -90,6 +103,7 @@ public class ToDoUpgrade {
                     writer.write(line);
                     writer.newLine();
                 }
+                Running = false;
                 reader.close();
                 writer.close();
                 s.close();
@@ -101,13 +115,32 @@ public class ToDoUpgrade {
     }
 
     private static void LoadToDosFile() {
-        System.out.print ("Input filepath of existing ToDos file: ");
-        try {
-            filePath = Path.of(s.nextLine());
-        } catch (InvalidPathException e) {
-            System.out.println(e.getMessage());
-        }
+            System.out.print("Input filepath of existing ToDos file: ");
+            String filepathstr = "";
+            try {
+                String notALlowedSymbs = "-=_+!@#$%^&*()<>{},;'/[]";
+                filepathstr = s.nextLine();
 
+                int error = 0;
+                for (int i = 0; i < filepathstr.length(); i++) {
+                    char[] AllowedSymbolsCharArray = notALlowedSymbs.toCharArray();
+                    for (char c : AllowedSymbolsCharArray) {
+                        if (filepathstr.charAt(i) == c) {
+                            error++;
+                        }
+                    }
+                }
+                if (error > 0) {
+                    System.out.println("Your filename or path can't contain special chars(like :, ^, ; and etc.)");
+                }
+                if (filepathstr.isEmpty()) {
+                    System.out.println("Enter something!");
+                }
+                filePath = Path.of(filepathstr);
+
+            } catch (InvalidPathException e) {
+                System.out.println(e.getMessage());
+            }
     }
 
     private static void CreateToDosFile() {
@@ -142,9 +175,9 @@ public class ToDoUpgrade {
             writer.close();
             System.out.println("Todo edded!");
         } catch (DateTimeException e) {
-            System.out.println("Wrong date format." + e.getMessage());
+            System.out.println("Wrong date format. " + e.getMessage());
         } catch (IOException e) {
-            System.out.println("Error during writing to file occured." + e.getMessage());
+            System.out.println("Error during writing to file occured. " + e.getMessage());
         }
     }
 
