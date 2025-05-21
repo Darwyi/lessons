@@ -65,10 +65,10 @@ public class TicTacToeFilesRework {
     }
 
     public static void saveSettings() {
-        try (PrintWriter out = new PrintWriter(new FileWriter(sett_file))) {
-            out.println(size);
-            out.println(playerX);
-            out.println(playerO);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(sett_file))) {
+            bw.write(size + "\n");
+            bw.write(playerX + "\n");
+            bw.write(playerO + "\n");
         } catch (IOException e) {
             System.out.println("Error saving settings: " + e.getMessage());
         }
@@ -85,9 +85,9 @@ public class TicTacToeFilesRework {
     }
 
     public static void saveStatistics(String winner) {
-        try (PrintWriter out = new PrintWriter(new FileWriter(stat_file, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(stat_file, true))) {
             LocalDateTime now = LocalDateTime.now();
-            out.println(now + ", Winner: " + winner + ", Field Size: " + size + ", " + playerX + " vs " + playerO);
+            bw.write(now + ", Winner: " + winner + ", Field Size: " + size + ", " + playerX + " vs " + playerO + "\n");
         } catch (IOException e) {
             System.out.println("Error saving statistics: " + e.getMessage());
         }
